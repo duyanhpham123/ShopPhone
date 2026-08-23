@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giỏ Hàng - ShopPhone</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="cart.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html" style="text-decoration: none; color: inherit;">
+                        <h1>ShopPhone</h1>
+                    </a>
+                </div>
+                
+                <div class="search-bar">
+                    <input type="text" placeholder="Tìm kiếm sản phẩm...">
+                    <button class="search-btn"><i class="fas fa-search"></i></button>
+                </div>
+                
+                <div class="header-right">
+                    <div class="location-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="user-icon" onclick="openAuthModal('login');" style="cursor: pointer;">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </div>
+                    <a href="#" class="sign-in-link" onclick="openAuthModal('login'); return false;">Sign In/Sign Up</a>
+                    <a href="cart.html" class="cart-link">My Cart</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Categories -->
+    <nav class="categories-nav">
+        <div class="container">
+            <a href="index.html">Trang chủ</a>
+            <a href="about.html">Giới thiệu</a>
+            <a href="products.html">Sản phẩm</a>
+            <a href="accessories.html">Phụ Kiện</a>
+            <a href="help.html">Trợ giúp</a>
+            <a href="contact.html">Liên hệ</a>
+        </div>
+    </nav>
+
+    <!-- Cart Page Content -->
+    <section class="cart-page">
+        <div class="container">
+            <div class="page-header">
+                <h1>Giỏ Hàng Của Bạn</h1>
+                <p>Quản lý và thanh toán đơn hàng của bạn</p>
+            </div>
+
+            <div class="cart-layout">
+                <!-- Cart Items -->
+                <div class="cart-items-section">
+                    <div class="cart-header">
+                        <h2>Sản phẩm trong giỏ (<span id="itemCount">0</span>)</h2>
+                        <button class="clear-cart-btn" onclick="clearCart()" id="clearCartBtn" style="display: none;">
+                            <i class="fas fa-trash"></i> Xóa tất cả
+                        </button>
+                    </div>
+                    <div id="cartItems" class="cart-items">
+                        <!-- Cart items will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- Cart Summary -->
+                <aside class="cart-summary">
+                    <div class="summary-card">
+                        <h3>Tóm tắt đơn hàng</h3>
+                        <div class="summary-row">
+                            <span>Tạm tính:</span>
+                            <span id="subtotal">0 VNĐ</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Phí vận chuyển:</span>
+                            <span id="shipping">Miễn phí</span>
+                        </div>
+                        <div class="summary-row discount">
+                            <span>Giảm giá:</span>
+                            <span id="discount">-0 VNĐ</span>
+                        </div>
+                        <div class="summary-divider"></div>
+                        <div class="summary-row total">
+                            <span>Tổng cộng:</span>
+                            <span id="total">0 VNĐ</span>
+                        </div>
+                        <button class="checkout-btn" onclick="checkout()" id="checkoutBtn" disabled>
+                            <i class="fas fa-lock"></i> Thanh toán
+                        </button>
+                        <a href="products.html" class="continue-shopping">
+                            <i class="fas fa-arrow-left"></i> Tiếp tục mua sắm
+                        </a>
+                    </div>
+
+                    <div class="promo-card">
+                        <h4>Mã giảm giá</h4>
+                        <div class="promo-input-group">
+                            <input type="text" id="promoCode" placeholder="Nhập mã giảm giá">
+                            <button onclick="applyPromoCode()">Áp dụng</button>
+                        </div>
+                        <p class="promo-message" id="promoMessage"></p>
+                    </div>
+                </aside>
+            </div>
+
+            <!-- Empty Cart State -->
+            <div id="emptyCart" class="empty-cart" style="display: none;">
+                <i class="fas fa-shopping-cart"></i>
+                <h2>Giỏ hàng của bạn đang trống</h2>
+                <p>Hãy thêm sản phẩm vào giỏ hàng để tiếp tục mua sắm</p>
+                <a href="products.html" class="shop-now-btn">
+                    <i class="fas fa-shopping-bag"></i> Mua sắm ngay
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <p>123 Shopping Street</p>
+                    <p>City, State 12345</p>
+                    <p>Phone: +1 200-19-21:30</p>
+                    <p>Email: support@shopphone.com</p>
+                    <h3 class="download-heading">Download App</h3>
+                    <div class="app-buttons">
+                        <button class="app-btn app-store">
+                            <i class="fab fa-apple"></i>
+                            <span>App Store</span>
+                        </button>
+                        <button class="app-btn google-play">
+                            <i class="fab fa-google-play"></i>
+                            <span>Google Play</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Most Popular Categories</h3>
+                    <ul>
+                        <li><a href="products.html">Điện Thoại</a></li>
+                        <li><a href="accessories.html">Phụ Kiện</a></li>
+                        <li><a href="#">Sạc & Cáp</a></li>
+                        <li><a href="#">Tai Nghe</a></li>
+                        <li><a href="#">Ốp Lưng</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Customer Services</h3>
+                    <!-- <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Terms & Conditions</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Return Policy</a></li>
+                    </ul> -->
+                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.796554570196!2d105.80212037400824!3d21.000790788741057!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135aca2b04ed991%3A0x92509d11839d4c5f!2zS2h1IEJp4buHdCBUaOG7sSBUaGFuaCBYdcOibiBSZXNpZGVuY2UsIDM1IFAuIEzDqiBWxINuIFRoacOqbSwgVGhhbmggWHXDom4gVHJ1bmcsIFRoYW5oIFh1w6JuLCBIw6AgTuG7mWkgMTAwMDAwLCBWaeG7h3QgTmFt!5e0!3m2!1svi!2s!4v1765094960368!5m2!1svi!2s"
+                     width="350" height="200" style="border:0;" 
+                    allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 All rights reserved. ShopPhone Ltd.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Checkout Modal -->
+    <div id="checkoutModal" class="checkout-modal">
+        <div class="checkout-modal-content">
+            <div class="checkout-modal-header">
+                <h2><i class="fas fa-credit-card"></i> Thanh toán đơn hàng</h2>
+                <span class="close-checkout-modal" onclick="closeCheckoutModal()">&times;</span>
+            </div>
+            <form id="checkoutForm" class="checkout-modal-body">
+                <div class="checkout-section">
+                    <h3>Thông tin khách hàng</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="customerName">Họ và tên *</label>
+                            <input type="text" id="customerName" name="customerName" required placeholder="Nhập họ và tên">
+                        </div>
+                        <div class="form-group">
+                            <label for="customerPhone">Số điện thoại *</label>
+                            <input type="tel" id="customerPhone" name="customerPhone" required placeholder="Nhập số điện thoại">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="customerEmail">Email *</label>
+                            <input type="email" id="customerEmail" name="customerEmail" required placeholder="Nhập email">
+                        </div>
+                        <div class="form-group">
+                            <label for="paymentMethod">Phương thức thanh toán *</label>
+                            <select id="paymentMethod" name="paymentMethod" required>
+                                <option value="">Chọn phương thức</option>
+                                <option value="cod">Thanh toán khi nhận hàng (COD)</option>
+                                <option value="bank">Chuyển khoản ngân hàng</option>
+                                <option value="momo">Ví điện tử MoMo</option>
+                                <option value="vnpay">VNPay</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="paymentMethodInfo" class="payment-method-info" style="display: none;">
+                        <p id="paymentMethodMessage" class="payment-method-message"></p>
+                        <div id="paymentQrWrapper" class="payment-qr-wrapper" style="display: none;">
+                            <img id="paymentQrImage" class="payment-qr-image" src="" alt="./img/qr.png">
+                            <p class="payment-qr-caption">Quét mã QR để thanh toán</p>
+                        </div>
+                        <div id="paymentConfirmGroup" class="payment-confirm-group" style="display: none;">
+                            <label for="paymentConfirmed">
+                                <input type="checkbox" id="paymentConfirmed" name="paymentConfirmed">
+                                Tôi đã hoàn tất thanh toán bằng phương thức đã chọn
+                            </label>
+                        </div>
+                        <p id="paymentMethodNote" class="payment-method-note"></p>
+                    </div>
+                </div>
+
+                <div class="checkout-section">
+                    <h3>Địa chỉ giao hàng</h3>
+                    <div class="form-group">
+                        <label for="customerAddress">Địa chỉ *</label>
+                        <input type="text" id="customerAddress" name="customerAddress" required placeholder="Nhập địa chỉ chi tiết">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="customerCity">Thành phố/Tỉnh *</label>
+                            <input type="text" id="customerCity" name="customerCity" required placeholder="Nhập thành phố/tỉnh">
+                        </div>
+                        <div class="form-group">
+                            <label for="customerDistrict">Quận/Huyện *</label>
+                            <input type="text" id="customerDistrict" name="customerDistrict" required placeholder="Nhập quận/huyện">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="checkout-section">
+                    <h3>Tóm tắt đơn hàng</h3>
+                    <div id="checkoutOrderSummary" class="order-summary-list">
+                        <!-- Order items will be displayed here -->
+                    </div>
+                    <div class="order-total-summary">
+                        <div class="summary-row">
+                            <span>Tạm tính:</span>
+                            <span id="checkoutSubtotal">0 VNĐ</span>
+                        </div>
+                        <div class="summary-row" id="checkoutDiscountRow" style="display: none;">
+                            <span>Giảm giá:</span>
+                            <span id="checkoutDiscount">-0 VNĐ</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Phí vận chuyển:</span>
+                            <span>Miễn phí</span>
+                        </div>
+                        <div class="summary-divider"></div>
+                        <div class="summary-row total">
+                            <span>Tổng cộng:</span>
+                            <span id="checkoutTotal">0 VNĐ</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="checkout-modal-actions">
+                    <button type="button" class="btn-secondary" onclick="closeCheckoutModal()">Hủy</button>
+                    <button type="submit" class="btn-primary">
+                        <i class="fas fa-check"></i> Xác nhận thanh toán
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="api.js"></script>
+    <script src="cart.js"></script>
+    <script src="cart-page.js"></script>
+    <script src="index.js"></script>
+</body>
+</html>
+

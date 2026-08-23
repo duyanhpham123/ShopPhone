@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý Sản phẩm - Admin</title>
+    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+        <div class="sidebar-header">
+            <h2><i class="fas fa-shield-alt"></i> Admin Panel</h2>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <a href="admin.html" class="nav-item">
+                <i class="fas fa-chart-line"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="admin-products.html" class="nav-item active">
+                <i class="fas fa-box"></i>
+                <span>Quản lý Sản phẩm</span>
+            </a>
+            <a href="admin-orders.html" class="nav-item">
+                <i class="fas fa-shopping-cart"></i>
+                <span>Quản lý Đơn hàng</span>
+            </a>
+            <a href="index.html" class="nav-item">
+                <i class="fas fa-home"></i>
+                <span>Về trang chủ</span>
+            </a>
+            <a href="#" class="nav-item" onclick="logoutAdmin()">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Đăng xuất</span>
+            </a>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="admin-main">
+        <!-- Header -->
+        <header class="admin-header">
+            <div class="header-left">
+                <h1>Quản lý Sản phẩm</h1>
+                <p>Thêm, sửa, xóa sản phẩm</p>
+            </div>
+            <div class="header-right">
+                <button class="btn-primary" onclick="openAddProductModal()">
+                    <i class="fas fa-plus"></i> Thêm sản phẩm mới
+                </button>
+            </div>
+        </header>
+
+        <!-- Product Type Tabs -->
+        <section class="product-type-tabs">
+            <button class="type-tab active" onclick="switchProductType('products')" id="tabProducts">
+                <i class="fas fa-mobile-alt"></i> Điện thoại
+            </button>
+            <button class="type-tab" onclick="switchProductType('accessories')" id="tabAccessories">
+                <i class="fas fa-headphones"></i> Phụ kiện
+            </button>
+        </section>
+
+        <!-- Search and Filter -->
+        <section class="admin-toolbar">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="productSearch" placeholder="Tìm kiếm sản phẩm..." onkeyup="filterProducts()">
+            </div>
+            <div class="filter-box">
+                <select id="brandFilter" onchange="filterProducts()">
+                    <option value="">Tất cả thương hiệu</option>
+                    <option value="Samsung">Samsung</option>
+                    <option value="Apple">Apple</option>
+                    <option value="Xiaomi">Xiaomi</option>
+                    <option value="Realme">Realme</option>
+                    <option value="Oppo">Oppo</option>
+                    <option value="Khác">Khác</option>
+                </select>
+            </div>
+            <div class="filter-box" id="categoryFilterBox" style="display: none;">
+                <select id="categoryFilter" onchange="filterProducts()">
+                    <option value="">Tất cả danh mục</option>
+                    <option value="Tai nghe">Tai nghe</option>
+                    <option value="Ốp lưng">Ốp lưng</option>
+                    <option value="Sạc">Sạc</option>
+                    <option value="Pin">Pin</option>
+                    <option value="Dán màn hình">Dán màn hình</option>
+                    <option value="Giá đỡ">Giá đỡ</option>
+                    <option value="Chuột">Chuột</option>
+                </select>
+            </div>
+        </section>
+
+        <!-- Products Table -->
+        <section class="admin-content">
+            <div class="table-container">
+                <div class="table-info">
+                    <p>Hiển thị <span id="showingFrom">0</span> - <span id="showingTo">0</span> trong tổng số <span id="totalProductsCount">0</span> sản phẩm</p>
+                </div>
+                <table class="admin-table">
+                    <thead>
+                        <tr id="tableHeader">
+                            <!-- Table headers will be dynamically generated -->
+                        </tr>
+                    </thead>
+                    <tbody id="productsTableBody">
+                        <!-- Products will be loaded here -->
+                    </tbody>
+                </table>
+            </div>
+            <!-- Pagination -->
+            <div id="pagination" class="pagination">
+                <!-- Pagination buttons will be loaded here -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Add/Edit Product Modal -->
+    <div id="productModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Thêm sản phẩm mới</h2>
+                <span class="close-modal" onclick="closeProductModal()">&times;</span>
+            </div>
+            <form id="productForm" class="modal-body">
+                <input type="hidden" id="productId" name="id">
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="productName">Tên sản phẩm *</label>
+                        <input type="text" id="productName" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="productBrand">Thương hiệu *</label>
+                        <select id="productBrand" name="brand" required>
+                            <option value="">Chọn thương hiệu</option>
+                            <option value="Samsung">Samsung</option>
+                            <option value="Apple">Apple</option>
+                            <option value="Xiaomi">Xiaomi</option>
+                            <option value="Realme">Realme</option>
+                            <option value="Oppo">Oppo</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="productPrice">Giá (VNĐ) *</label>
+                        <input type="number" id="productPrice" name="price" required min="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="productOldPrice">Giá cũ (VNĐ)</label>
+                        <input type="number" id="productOldPrice" name="oldPrice" min="0">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="productStock">Tồn kho *</label>
+                        <input type="number" id="productStock" name="stock" required min="0" value="0">
+                    </div>
+                </div>
+
+                <div class="form-row" id="productSpecsRow">
+                    <div class="form-group">
+                        <label for="productRAM">RAM (GB) *</label>
+                        <input type="number" id="productRAM" name="ram" required min="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="productStorage">Bộ nhớ (GB) *</label>
+                        <input type="number" id="productStorage" name="storage" required min="0">
+                    </div>
+                </div>
+                <div class="form-row" id="storageOptionsRow">
+                    <div class="form-group">
+                        <label for="productStorageOptions">Phiên bản dung lượng (mỗi dòng: Dung lượng|Giá)</label>
+                        <textarea id="productStorageOptions" name="storageOptions" rows="3" placeholder="256GB|36490000&#10;512GB|42790000&#10;1TB|49690000"></textarea>
+                    </div>
+                </div>
+                <div class="form-row" id="accessoryCategoryRow" style="display: none;">
+                    <div class="form-group">
+                        <label for="productCategory">Danh mục *</label>
+                        <select id="productCategory" name="category">
+                            <option value="">Chọn danh mục</option>
+                            <option value="Tai nghe">Tai nghe</option>
+                            <option value="Ốp lưng">Ốp lưng</option>
+                            <option value="Sạc">Sạc</option>
+                            <option value="Pin">Pin</option>
+                            <option value="Dán màn hình">Dán màn hình</option>
+                            <option value="Giá đỡ">Giá đỡ</option>
+                            <option value="Chuột">Chuột</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="productImage">URL hình ảnh *</label>
+                        <input type="text" id="productImage" name="image" required placeholder="./img/example.jpg">
+                    </div>
+                    <div class="form-group">
+                        <label for="productBadge">Badge</label>
+                        <select id="productBadge" name="badge">
+                            <option value="OFF">OFF</option>
+                            <option value="NEW">NEW</option>
+                            <option value="HOT">HOT</option>
+                            <option value="SALE">Sale</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="productGallery">Ảnh phụ (mỗi dòng 1 URL)</label>
+                        <textarea id="productGallery" name="gallery" rows="4" placeholder="./img/sp1-1.jpg&#10;./img/sp1-2.jpg"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Màu sắc (radio + giá cạnh màu)</label>
+                        <input type="hidden" id="productColors" name="colors">
+                        <div id="productColorsList" class="color-rows-list"></div>
+                        <button type="button" class="btn-secondary color-add-btn" onclick="addColorRow()">
+                            <i class="fas fa-plus"></i> Thêm màu
+                        </button>
+                    </div>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn-secondary" onclick="closeProductModal()">Hủy</button>
+                    <button type="submit" class="btn-primary">Lưu sản phẩm</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="api.js"></script>
+    <script src="products.js"></script>
+    <script src="accessories.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phụ Kiện - ShopPhone</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="accessories.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html" style="text-decoration: none; color: inherit;">
+                        <h1>ShopPhone</h1>
+                    </a>
+                </div>
+                
+                <div class="search-bar">
+                    <input type="text" placeholder="Tìm kiếm phụ kiện..." id="searchInput">
+                    <button class="search-btn" onclick="handleSearch()"><i class="fas fa-search"></i></button>
+                </div>
+                
+                <div class="header-right">
+                    <div class="location-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="user-icon" onclick="openAuthModal('login');" style="cursor: pointer;">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </div>
+                    <a href="#" class="sign-in-link" onclick="openAuthModal('login'); return false;">Sign In/Sign Up</a>
+                    <a href="cart.html" class="cart-link">My Cart</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Categories -->
+    <nav class="categories-nav">
+        <div class="container">
+            <a href="index.html">Trang chủ</a>
+            <a href="about.html">Giới thiệu</a>
+            <a href="products.html">Sản phẩm</a>
+            <a href="accessories.html" class="active">Phụ Kiện</a>
+            <a href="help.html">Trợ giúp</a>
+            <a href="contact.html">Liên hệ</a>
+        </div>
+    </nav>
+
+    <!-- Accessories Page Content -->
+    <section class="accessories-page">
+        <div class="container">
+            <div class="page-header">
+                <h1>Phụ Kiện Điện Thoại</h1>
+                <p>Khám phá bộ sưu tập phụ kiện đa dạng cho điện thoại của bạn</p>
+            </div>
+
+            <div class="accessories-layout">
+                <!-- Sidebar Filters -->
+                <aside class="filters-sidebar">
+                    <div class="filter-section">
+                        <h3>Bộ Lọc</h3>
+                        <button class="clear-filters" onclick="clearAllFilters()">Xóa tất cả</button>
+                    </div>
+
+                    <div class="filter-group">
+                        <h4>Loại phụ kiện</h4>
+                        <label><input type="checkbox" value="Tai nghe" onchange="applyFilters()"> Tai nghe</label>
+                        <label><input type="checkbox" value="Ốp lưng" onchange="applyFilters()"> Ốp lưng</label>
+                        <label><input type="checkbox" value="Sạc" onchange="applyFilters()"> Sạc & Cáp</label>
+                        <label><input type="checkbox" value="Pin" onchange="applyFilters()"> Pin dự phòng</label>
+                        <label><input type="checkbox" value="Dán màn hình" onchange="applyFilters()"> Dán màn hình</label>
+                        <label><input type="checkbox" value="Giá đỡ" onchange="applyFilters()"> Giá đỡ</label>
+                        <label><input type="checkbox" value="Chuột" onchange="applyFilters()"> Chuột</label>
+                    </div>
+
+                    <div class="filter-group">
+                        <h4>Khoảng giá</h4>
+                        <label><input type="radio" name="price" value="0-100" onchange="applyFilters()"> Dưới 100.000đ</label>
+                        <label><input type="radio" name="price" value="100-300" onchange="applyFilters()"> 100.000 - 300.000đ</label>
+                        <label><input type="radio" name="price" value="300-500" onchange="applyFilters()"> 300.000 - 500.000đ</label>
+                        <label><input type="radio" name="price" value="500+" onchange="applyFilters()"> Trên 500.000đ</label>
+                    </div>
+
+                    <div class="filter-group">
+                        <h4>Thương hiệu</h4>
+                        <label><input type="checkbox" value="Apple" onchange="applyFilters()"> Apple</label>
+                        <label><input type="checkbox" value="Samsung" onchange="applyFilters()"> Samsung</label>
+                        <label><input type="checkbox" value="Xiaomi" onchange="applyFilters()"> Xiaomi</label>
+                        <label><input type="checkbox" value="Khác" onchange="applyFilters()"> Khác</label>
+                    </div>
+                </aside>
+
+                <!-- Main Content -->
+                <main class="accessories-main">
+                    <div class="accessories-toolbar">
+                        <div class="view-options">
+                            <span class="results-count">Hiển thị <span id="resultsCount">0</span> sản phẩm</span>
+                        </div>
+                        <div class="sort-options">
+                            <label>Sắp xếp:</label>
+                            <select id="sortSelect" onchange="applyFilters()">
+                                <option value="default">Mặc định</option>
+                                <option value="price-asc">Giá tăng dần</option>
+                                <option value="price-desc">Giá giảm dần</option>
+                                <option value="name-asc">Tên A-Z</option>
+                                <option value="name-desc">Tên Z-A</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="accessories-grid" id="accessoriesGrid">
+                        <!-- Accessories will be loaded here by JavaScript -->
+                    </div>
+
+                    <div class="pagination" id="pagination">
+                        <!-- Pagination will be generated by JavaScript -->
+                    </div>
+                </main>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Liên Hệ Chúng Tôi</h3>
+                    <p>123 Shopping Street</p>
+                    <p>City, State 12345</p>
+                    <p>Phone: +1 200-19-21:30</p>
+                    <p>Email: support@shopphone.com</p>
+                    <h3 class="download-heading">Download App</h3>
+                    <div class="app-buttons">
+                        <button class="app-btn app-store">
+                            <i class="fab fa-apple"></i>
+                            <span>App Store</span>
+                        </button>
+                        <button class="app-btn google-play">
+                            <i class="fab fa-google-play"></i>
+                            <span>Google Play</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Danh mục sản phẩm</h3>
+                    <ul>
+                        <li><a href="products.html">Điện Thoại</a></li>
+                        <li><a href="accessories.html">Phụ Kiện</a></li>
+                        <li><a href="#">Sạc & Cáp</a></li>
+                        <li><a href="#">Tai Nghe</a></li>
+                        <li><a href="#">Ốp Lưng</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                     <h3>Customer Services</h3>
+                    <!--<ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Terms & Conditions</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Return Policy</a></li>
+                    </ul> -->
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.796554570196!2d105.80212037400824!3d21.000790788741057!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135aca2b04ed991%3A0x92509d11839d4c5f!2zS2h1IEJp4buHdCBUaOG7sSBUaGFuaCBYdcOibiBSZXNpZGVuY2UsIDM1IFAuIEzDqiBWxINuIFRoacOqbSwgVGhhbmggWHXDom4gVHJ1bmcsIFRoYW5oIFh1w6JuLCBIw6AgTuG7mWkgMTAwMDAwLCBWaeG7h3QgTmFt!5e0!3m2!1svi!2s!4v1765094960368!5m2!1svi!2s"
+                     width="350" height="200" style="border:0;" 
+                    allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 All rights reserved. ShopPhone Ltd.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Auth Modal -->
+    <div id="authModal" class="auth-modal">
+        <div class="auth-modal-content">
+            <span class="close-modal" onclick="closeAuthModal()">&times;</span>
+            
+            <div class="auth-tabs">
+                <button class="auth-tab active" onclick="switchTab('login')">Đăng Nhập</button>
+                <button class="auth-tab" onclick="switchTab('register')">Đăng Ký</button>
+            </div>
+
+            <div id="loginForm" class="auth-form active">
+                <h2>Đăng Nhập</h2>
+                <form id="loginFormElement" onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label for="loginEmail">Email hoặc Số điện thoại</label>
+                        <input type="text" id="loginEmail" name="email" required placeholder="Nhập email hoặc số điện thoại">
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">Mật khẩu</label>
+                        <div class="password-input">
+                            <input type="password" id="loginPassword" name="password" required placeholder="Nhập mật khẩu">
+                            <i class="fas fa-eye" onclick="togglePassword('loginPassword', this)"></i>
+                        </div>
+                    </div>
+                    <div class="form-options">
+                        <label class="remember-me">
+                            <input type="checkbox" name="remember">
+                            <span>Ghi nhớ đăng nhập</span>
+                        </label>
+                        <a href="#" class="forgot-password">Quên mật khẩu?</a>
+                    </div>
+                    <button type="submit" class="auth-submit-btn">Đăng Nhập</button>
+                </form>
+            </div>
+
+            <div id="registerForm" class="auth-form">
+                <h2>Đăng Ký</h2>
+                <form id="registerFormElement" onsubmit="handleRegister(event)">
+                    <div class="form-group">
+                        <label for="registerName">Họ và tên</label>
+                        <input type="text" id="registerName" name="name" required placeholder="Nhập họ và tên">
+                    </div>
+                    <div class="form-group">
+                        <label for="registerEmail">Email</label>
+                        <input type="email" id="registerEmail" name="email" required placeholder="Nhập email">
+                    </div>
+                    <div class="form-group">
+                        <label for="registerPhone">Số điện thoại</label>
+                        <input type="tel" id="registerPhone" name="phone" required placeholder="Nhập số điện thoại">
+                    </div>
+                    <div class="form-group">
+                        <label for="registerPassword">Mật khẩu</label>
+                        <div class="password-input">
+                            <input type="password" id="registerPassword" name="password" required placeholder="Nhập mật khẩu">
+                            <i class="fas fa-eye" onclick="togglePassword('registerPassword', this)"></i>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Xác nhận mật khẩu</label>
+                        <div class="password-input">
+                            <input type="password" id="confirmPassword" name="confirmPassword" required placeholder="Nhập lại mật khẩu">
+                            <i class="fas fa-eye" onclick="togglePassword('confirmPassword', this)"></i>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="agree-terms">
+                            <input type="checkbox" name="agreeTerms" required>
+                            <span>Tôi đồng ý với <a href="#">Điều khoản</a> và <a href="#">Chính sách bảo mật</a></span>
+                        </label>
+                    </div>
+                    <button type="submit" class="auth-submit-btn">Đăng Ký</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="api.js"></script>
+    <script src="cart.js"></script>
+    <script src="index.js"></script>
+    <script src="accessories.js"></script>
+</body>
+</html>
+

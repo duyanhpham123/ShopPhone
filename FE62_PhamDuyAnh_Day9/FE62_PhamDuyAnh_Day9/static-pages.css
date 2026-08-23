@@ -1,0 +1,238 @@
+/* Trang Giới thiệu / Trợ giúp / Liên hệ — dùng cùng theme ShopPhone (index.css) */
+
+.static-page {
+    padding: 24px 0 48px;
+    background: #f5f7fb;
+    min-height: 50vh;
+}
+
+.static-hero {
+    background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+    border-radius: 14px;
+    padding: 32px 28px;
+    margin-bottom: 28px;
+    border: 1px solid #e5e7eb;
+}
+
+.static-hero h1 {
+    color: #1e3a8a;
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.static-hero p {
+    color: #374151;
+    font-size: 16px;
+    max-width: 720px;
+    margin: 0;
+    line-height: 1.6;
+}
+
+.static-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.static-card {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 22px;
+    box-shadow: 0 6px 16px rgba(2, 6, 23, 0.04);
+}
+
+.static-card h2 {
+    color: #1e3a8a;
+    font-size: 18px;
+    margin-bottom: 12px;
+}
+
+.static-card p,
+.static-card li {
+    color: #4b5563;
+    line-height: 1.6;
+    font-size: 15px;
+}
+
+.static-card ul,
+.static-card ol {
+    margin: 0;
+    padding-left: 20px;
+}
+
+/* FAQ — Trợ giúp */
+.faq-list {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.faq-item {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.faq-question {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 16px 18px;
+    background: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    color: #1f2937;
+    text-align: left;
+    font-family: inherit;
+}
+
+.faq-question:hover {
+    background: #f8fafc;
+}
+
+.faq-question .faq-icon {
+    color: #1e3a8a;
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
+}
+
+.faq-item.is-open .faq-question .faq-icon {
+    transform: rotate(180deg);
+}
+
+.faq-answer {
+    display: none;
+    padding: 0 18px 16px;
+    color: #4b5563;
+    font-size: 14px;
+    line-height: 1.65;
+    border-top: 1px solid #f3f4f6;
+}
+
+.faq-item.is-open .faq-answer {
+    display: block;
+}
+
+/* Liên hệ */
+.contact-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.15fr;
+    gap: 24px;
+    align-items: start;
+}
+
+.contact-info .info-row {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 14px;
+    color: #374151;
+}
+
+.contact-info .info-row i {
+    color: #1e3a8a;
+    width: 22px;
+    text-align: center;
+    margin-top: 3px;
+}
+
+.contact-form .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+}
+
+.contact-form label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 6px;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 11px 14px;
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: inherit;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    outline: none;
+    border-color: #1e3a8a;
+}
+
+.contact-form .form-group {
+    margin-bottom: 14px;
+}
+
+.contact-form .btn-submit {
+    width: 100%;
+    padding: 14px;
+    background: #1e3a8a;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.contact-form .btn-submit:hover {
+    background: #1e40af;
+}
+
+.form-message {
+    margin-top: 12px;
+    padding: 12px 14px;
+    border-radius: 8px;
+    font-size: 14px;
+    display: none;
+}
+
+.form-message.is-success {
+    display: block;
+    background: #d1fae5;
+    color: #065f46;
+    border: 1px solid #6ee7b7;
+}
+
+.form-message.is-error {
+    display: block;
+    background: #fee2e2;
+    color: #991b1b;
+    border: 1px solid #fca5a5;
+}
+
+@media (max-width: 992px) {
+    .static-grid,
+    .contact-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .static-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .static-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-form .form-row {
+        grid-template-columns: 1fr;
+    }
+}

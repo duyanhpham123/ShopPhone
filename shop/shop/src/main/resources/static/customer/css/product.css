@@ -1,0 +1,107 @@
+:root {
+  --primary-color: #f6ab49;
+}
+.section__product-detail {
+  width: 100%;
+  overflow: hidden;
+}
+.section__product-detail .product__detail-img {
+  border: 1px solid var(--primary-color);
+  margin-bottom: 10px;
+}
+.section__product-detail .product__detail-img .swiper-slide {
+  max-height: 400px;
+}
+.product__detail-img .swiper__product-img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.mb-10 {
+  margin-bottom: 18px;
+}
+.product__detail-summery {
+  padding: 0 20px;
+}
+.product__detail-summery .product__header .product__header-title {
+  font-size: 24px;
+  font-weight: 500;
+  color: #000000;
+}
+
+.product__detail-summery .product__price .curr__price {
+  font-size: 20px;
+  font-weight: 600;
+  margin-right: 8px;
+  color: #555555;
+}
+.product__detail-summery .product__price .old__price {
+  font-size: 16px;
+  color: #d8d8d8;
+  text-decoration: line-through;
+}
+
+.product__code span {
+  font-size: 16px;
+  font-style: italic;
+}
+.product__inventroy {
+  font-size: 16px;
+}
+.product__inventroy .inventroy-title {
+  font-weight: bold;
+}
+.product__quantity {
+  display: flex;
+  align-items: center;
+}
+.product__quantity span {
+  margin-right: 8px;
+  font-weight: bold;
+}
+
+.product__quantity .quantity__plus input {
+  width: 80px;
+}
+
+.product__cart-button {
+  display: flex;
+  align-items: center;
+  margin-top: 50px;
+}
+.product__cart-button .add__to__cart a {
+  padding: 8px 15px;
+  background: var(--primary-color);
+  color: #fff;
+  margin-right: 40px;
+  text-transform: uppercase;
+}
+.product__cart-button .add__to__cart:hover a {
+  background: #000;
+}
+
+.product__cart-button .add-cart-heart {
+  font-size: 28px;
+  color: #000;
+}
+.product__cart-button .add-cart-heart:hover {
+  color: var(--primary-color);
+}
+
+.section__product-description {
+  margin: 50px 0;
+}
+.section__product-description .detail__heading {
+  font-size: 26px;
+  text-decoration: underline;
+  margin-bottom: 10px;
+}
+.section__product-description .detail__text {
+  font-size: 16px;
+  text-align: justify;
+}
+
+.related__products {
+  margin-bottom: 50px;
+}

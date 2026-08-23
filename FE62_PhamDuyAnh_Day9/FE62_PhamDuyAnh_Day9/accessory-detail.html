@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi Tiết Phụ Kiện - ShopPhone</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="products.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html" style="text-decoration: none; color: inherit;">
+                        <h1>ShopPhone</h1>
+                    </a>
+                </div>
+                <div class="search-bar">
+                    <input type="text" placeholder="Tìm kiếm phụ kiện...">
+                    <button class="search-btn"><i class="fas fa-search"></i></button>
+                </div>
+                <div class="header-right">
+                    <div class="location-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div class="user-icon" onclick="openAuthModal('login');" style="cursor: pointer;">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </div>
+                    <a href="#" class="sign-in-link" onclick="openAuthModal('login'); return false;">Sign In/Sign Up</a>
+                    <a href="cart.html" class="cart-link">My Cart</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="categories-nav">
+        <div class="container">
+            <a href="index.html">Trang chủ</a>
+            <a href="about.html">Giới thiệu</a>
+            <a href="products.html">Sản phẩm</a>
+            <a href="accessories.html" class="active">Phụ Kiện</a>
+            <a href="help.html">Trợ giúp</a>
+            <a href="contact.html">Liên hệ</a>
+        </div>
+    </nav>
+
+    <section class="product-detail-page">
+        <div class="container">
+            <div id="productDetailContainer" class="product-detail-layout"></div>
+            <div class="product-detail-extra">
+                <h2>Phụ kiện liên quan</h2>
+                <div id="relatedProducts" class="products-grid"></div>
+            </div>
+        </div>
+    </section>
+
+    <div id="authModal" class="auth-modal">
+        <div class="auth-modal-content">
+            <span class="close-modal" onclick="closeAuthModal()">&times;</span>
+            <div class="auth-tabs">
+                <button class="auth-tab active" onclick="switchTab('login')">Đăng Nhập</button>
+                <button class="auth-tab" onclick="switchTab('register')">Đăng Ký</button>
+            </div>
+            <div id="loginForm" class="auth-form active">
+                <h2>Đăng Nhập</h2>
+                <form id="loginFormElement" onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label for="loginEmail">Email hoặc Số điện thoại</label>
+                        <input type="text" id="loginEmail" name="email" required placeholder="Nhập email hoặc số điện thoại">
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">Mật khẩu</label>
+                        <div class="password-input">
+                            <input type="password" id="loginPassword" name="password" required placeholder="Nhập mật khẩu">
+                            <i class="fas fa-eye" onclick="togglePassword('loginPassword', this)"></i>
+                        </div>
+                    </div>
+                    <button type="submit" class="auth-submit-btn">Đăng Nhập</button>
+                </form>
+            </div>
+            <div id="registerForm" class="auth-form">
+                <h2>Đăng Ký</h2>
+                <form id="registerFormElement" onsubmit="handleRegister(event)">
+                    <div class="form-group">
+                        <label for="registerName">Họ và tên</label>
+                        <input type="text" id="registerName" name="name" required placeholder="Nhập họ và tên">
+                    </div>
+                    <div class="form-group">
+                        <label for="registerEmail">Email</label>
+                        <input type="email" id="registerEmail" name="email" required placeholder="Nhập email">
+                    </div>
+                    <div class="form-group">
+                        <label for="registerPhone">Số điện thoại</label>
+                        <input type="tel" id="registerPhone" name="phone" required placeholder="Nhập số điện thoại">
+                    </div>
+                    <div class="form-group">
+                        <label for="registerPassword">Mật khẩu</label>
+                        <div class="password-input">
+                            <input type="password" id="registerPassword" name="password" required placeholder="Nhập mật khẩu">
+                            <i class="fas fa-eye" onclick="togglePassword('registerPassword', this)"></i>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Xác nhận mật khẩu</label>
+                        <div class="password-input">
+                            <input type="password" id="confirmPassword" name="confirmPassword" required placeholder="Nhập lại mật khẩu">
+                            <i class="fas fa-eye" onclick="togglePassword('confirmPassword', this)"></i>
+                        </div>
+                    </div>
+                    <button type="submit" class="auth-submit-btn">Đăng Ký</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="api.js"></script>
+    <script src="cart.js"></script>
+    <script src="index.js"></script>
+    <script src="accessory-detail.js"></script>
+</body>
+</html>
